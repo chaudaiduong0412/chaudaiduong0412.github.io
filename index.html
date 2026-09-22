@@ -648,11 +648,11 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
 </script>
 
 <script type="importmap">
-{"imports":{"three":"./lib/three.module.min.js","three/addons/":"./lib/"}}
+{"imports":{"three":"./three.module.min.js"}}
 </script>
 <script type="module">
 import * as THREE from 'three';
-import { GLTFLoader } from './lib/GLTFLoader.js';
+import { GLTFLoader } from './GLTFLoader.js';
 
 const host = document.getElementById('stage');
 if (host) {
@@ -711,7 +711,7 @@ if (host) {
   function loadAvatar(url, fallback){
     loader.load(url, onAvatar, undefined, () => {
       if (fallback) {
-        import('./lib/avatar-embed.js')
+        import('./avatar-embed.js')
           .then((m) => loadAvatar(m.default, null))
           .catch(() => host.classList.add('failed'));
       } else host.classList.add('failed');
