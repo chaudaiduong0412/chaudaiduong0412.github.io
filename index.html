@@ -298,7 +298,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
         <figcaption>RP 24-12 poster session · Georgia Institute of Technology</figcaption>
       </figure>
       <div class="rv">
-        <p>I'm a second-semester M.Eng. student in <strong>Construction Management at Georgia Tech</strong>, holding a 4.00, and a graduate research assistant under Prof. Yichang (James) Tsai.</p>
+        <p>I'm a second-semester M.Eng. student in <strong>Construction Management at Georgia Tech</strong>, holding a 4.00, and a graduate research assistant under Prof. Yichang (James) Tsai on a Georgia DOT project.</p>
         <p>I trained as a structural engineer at <strong>Ho Chi Minh City University of Technology</strong> on the structural and foundation track. My capstone was the full design of a 14-storey reinforced concrete apartment building — frame, beams, columns, slabs, staircases, rooftop water tank, down to the spun pile foundation.</p>
         <p>Then I went to the field. A summer as a field engineer intern with <strong>Newtecons</strong> on Flora Mizuki, and a year with <strong>BM Windows</strong> as superintendent and project engineer on the Zeit River Thu Thiem façade package. I processed the RFIs and submittals, produced and reviewed the shop drawings, coordinated the trades, and held the fabrication–delivery–installation schedule together.</p>
         <p>That year taught me the thing design school cannot: a drawing is only worth what the crew can actually build from it at eleven o'clock on a wet morning.</p>
@@ -580,7 +580,6 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
   </div>
 </footer>
 
-<script src="three.min.js"></script>
 <script>
 (function(){
   'use strict';
@@ -645,166 +644,139 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
     else { draw=function(){}; cx.globalAlpha=.5; stars.forEach(function(s){cx.fillStyle='#cfc6ff';cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.283);cx.fill();}); }
   })();
 
-  /* ---------- 3D tower ---------- */
-  (function(){
-    if(typeof THREE==='undefined') return;
-    var host=document.getElementById('stage');
-    var W=host.clientWidth, H=host.clientHeight;
-    var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-    renderer.setSize(W,H);
-    host.insertBefore(renderer.domElement,host.firstChild);
-
-    var scene=new THREE.Scene();
-    var camera=new THREE.PerspectiveCamera(38,W/H,.1,200);
-    camera.position.set(0,5.4,23.5);
-    camera.lookAt(0,2.0,0);
-
-    var group=new THREE.Group(); scene.add(group);
-
-    var PURPLE=0x915eff, LILAC=0xb794ff;
-
-    // --- one tower: glass body + floor lines + mullions ---
-    function tower(w,d,floors,fh,x,z,radius){
-      var g=new THREE.Group();
-      var h=floors*fh;
-
-      var shape=new THREE.Shape();
-      var hw=w/2, hd=d/2, r=radius;
-      shape.moveTo(-hw+r,-hd);
-      shape.lineTo(hw,-hd);
-      shape.lineTo(hw,hd);
-      shape.lineTo(-hw,hd);
-      shape.lineTo(-hw,-hd+r);
-      shape.absarc(-hw+r,-hd+r,r,Math.PI,Math.PI*1.5,false);
-
-      var body=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false,curveSegments:14});
-      body.rotateX(-Math.PI/2);
-      var glass=new THREE.Mesh(body,new THREE.MeshPhysicalMaterial({
-        color:0x2a2160,metalness:.25,roughness:.15,transmission:.55,thickness:1.2,
-        transparent:true,opacity:.62,clearcoat:.6
-      }));
-      glass.position.set(0,0,0);
-      g.add(glass);
-
-      var edges=new THREE.LineSegments(
-        new THREE.EdgesGeometry(body,18),
-        new THREE.LineBasicMaterial({color:LILAC,transparent:true,opacity:.75})
-      );
-      g.add(edges);
-
-      // floor slabs as thin outlines
-      var pts=[];
-      for(var f=1;f<floors;f++){
-        var y=f*fh;
-        pts.push(-hw+r,y,-hd, hw,y,-hd,  hw,y,-hd, hw,y,hd,  hw,y,hd, -hw,y,hd,  -hw,y,hd, -hw,y,-hd+r);
-        var seg=8;
-        for(var s2=0;s2<seg;s2++){
-          var a0=Math.PI+(Math.PI/2)*(s2/seg), a1=Math.PI+(Math.PI/2)*((s2+1)/seg);
-          pts.push(-hw+r+Math.cos(a0)*r, y, -hd+r+Math.sin(a0)*r,
-                   -hw+r+Math.cos(a1)*r, y, -hd+r+Math.sin(a1)*r);
-        }
-      }
-      var fg=new THREE.BufferGeometry();
-      fg.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
-      g.add(new THREE.LineSegments(fg,new THREE.LineBasicMaterial({color:PURPLE,transparent:true,opacity:.42})));
-
-      // a few lit panes
-      var lit=new THREE.MeshBasicMaterial({color:LILAC,transparent:true,opacity:.5,side:THREE.DoubleSide});
-      for(var k=0;k<Math.round(floors*.7);k++){
-        var pane=new THREE.Mesh(new THREE.PlaneGeometry(w*.17,fh*.6),lit);
-        var fl=1+Math.floor(Math.random()*(floors-1));
-        var side=Math.floor(Math.random()*4);
-        var yy=fl*fh+fh*.5;
-        var off=(Math.random()-.5)*(w*.62);
-        if(side===0){ pane.position.set(off,yy,hd+.01); }
-        else if(side===1){ pane.position.set(off,yy,-hd-.01); pane.rotation.y=Math.PI; }
-        else if(side===2){ pane.position.set(hw+.01,yy,off*(d/w)); pane.rotation.y=Math.PI/2; }
-        else { pane.position.set(-hw-.01,yy,off*(d/w)); pane.rotation.y=-Math.PI/2; }
-        g.add(pane);
-      }
-
-      // crown
-      var crown=new THREE.Mesh(
-        new THREE.BoxGeometry(w*.34,fh*.9,d*.34),
-        new THREE.MeshStandardMaterial({color:0x3a2f7a,metalness:.5,roughness:.4})
-      );
-      crown.position.set(0,h+fh*.45,0);
-      g.add(crown);
-
-      g.position.set(x,0,z);
-      return g;
-    }
-
-    group.add(tower(3.4,3.0,17,.42,-2.3,0,.9));
-    group.add(tower(3.0,2.6,13,.42, 2.4,-1.1,.8));
-
-    // podium
-    var pod=new THREE.Mesh(
-      new THREE.BoxGeometry(9.6,.9,6.2),
-      new THREE.MeshStandardMaterial({color:0x1a1642,metalness:.3,roughness:.6})
-    );
-    pod.position.set(0,-.45,-.4); group.add(pod);
-    group.add(new THREE.LineSegments(
-      new THREE.EdgesGeometry(pod.geometry),
-      new THREE.LineBasicMaterial({color:PURPLE,transparent:true,opacity:.5})
-    ).translateY(-.45).translateZ(-.4));
-
-    // ground grid
-    var grid=new THREE.GridHelper(40,40,PURPLE,0x2a2350);
-    grid.material.transparent=true; grid.material.opacity=.16;
-    grid.position.y=-.92; group.add(grid);
-
-    group.position.y=-3.1;
-
-    scene.add(new THREE.AmbientLight(0x8f7fd8,1.1));
-    var key=new THREE.DirectionalLight(0xffffff,1.5); key.position.set(6,12,9); scene.add(key);
-    var rim=new THREE.PointLight(PURPLE,60,60); rim.position.set(-8,6,-6); scene.add(rim);
-    var warm=new THREE.PointLight(0x6ad1ff,25,50); warm.position.set(9,3,7); scene.add(warm);
-
-    /* drag to rotate */
-    var rot=0.5, target=0.5, vel=0, dragging=false, lastX=0, tilt=0, tiltT=0;
-    var el=renderer.domElement;
-    function down(x,y){ dragging=true; lastX=x; vel=0; }
-    function move(x){ if(!dragging) return; var dx=x-lastX; lastX=x; target+=dx*.008; vel=dx*.008; }
-    function up(){ dragging=false; }
-    el.addEventListener('pointerdown',function(e){ el.setPointerCapture(e.pointerId); down(e.clientX,e.clientY); });
-    el.addEventListener('pointermove',function(e){ move(e.clientX); });
-    el.addEventListener('pointerup',up); el.addEventListener('pointercancel',up);
-    host.addEventListener('pointermove',function(e){
-      var r=host.getBoundingClientRect();
-      tiltT=((e.clientY-r.top)/r.height-.5)*.34;
-    });
-    host.addEventListener('pointerleave',function(){ tiltT=0; });
-
-    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var visible=true;
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:0}).observe(host);
-    }
-
-    function resize(){
-      W=host.clientWidth; H=host.clientHeight;
-      if(!W||!H) return;
-      camera.aspect=W/H; camera.updateProjectionMatrix(); renderer.setSize(W,H);
-    }
-    window.addEventListener('resize',resize);
-
-    var t=0;
-    function loop(){
-      requestAnimationFrame(loop);
-      if(!visible) return;
-      t+=.016;
-      if(!dragging && !reduce) target+=0.0022;
-      rot+=(target-rot)*.09;
-      tilt+=(tiltT-tilt)*.06;
-      group.rotation.y=rot;
-      group.rotation.x=tilt;
-      group.position.y=-3.1+(reduce?0:Math.sin(t*.8)*.09);
-      renderer.render(scene,camera);
-    }
-    loop();
-    setTimeout(resize,60);
-  })();
 })();
+</script>
+
+<script type="importmap">
+{"imports":{"three":"./lib/three.module.min.js","three/addons/":"./lib/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from './lib/GLTFLoader.js';
+
+const host = document.getElementById('stage');
+if (host) {
+  let W = host.clientWidth, H = host.clientHeight - 26;
+
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(W, H);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+  host.insertBefore(renderer.domElement, host.firstChild);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, W/H, 0.1, 100);
+  camera.position.set(0, 0.12, 3.5);
+  camera.lookAt(0, -0.04, 0);
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const PURPLE = 0x915eff;
+
+  // lighting: neutral key, purple rim, cool fill
+  scene.add(new THREE.HemisphereLight(0xdfd6ff, 0x1a1436, 1.5));
+  const key = new THREE.DirectionalLight(0xffffff, 2.4);
+  key.position.set(2.4, 3.2, 3.4); scene.add(key);
+  const rim = new THREE.DirectionalLight(PURPLE, 3.2);
+  rim.position.set(-3, 1.6, -2.6); scene.add(rim);
+  const fill = new THREE.DirectionalLight(0x74c7ff, 0.9);
+  fill.position.set(-2.2, 0.4, 2.6); scene.add(fill);
+
+  // ground: glow disc + grid
+  const gcv = document.createElement('canvas'); gcv.width = gcv.height = 128;
+  const gx = gcv.getContext('2d');
+  const grd = gx.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grd.addColorStop(0, 'rgba(145,94,255,0.55)');
+  grd.addColorStop(0.45, 'rgba(145,94,255,0.16)');
+  grd.addColorStop(1, 'rgba(145,94,255,0)');
+  gx.fillStyle = grd; gx.fillRect(0, 0, 128, 128);
+  const glowTex = new THREE.CanvasTexture(gcv);
+  const disc = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.4, 2.4),
+    new THREE.MeshBasicMaterial({ map:glowTex, transparent:true, depthWrite:false })
+  );
+  disc.rotation.x = -Math.PI/2; disc.position.y = -0.955; group.add(disc);
+
+  const grid = new THREE.GridHelper(6, 14, PURPLE, 0x2a2350);
+  grid.material.transparent = true; grid.material.opacity = 0.14;
+  grid.position.y = -0.96; group.add(grid);
+
+  let avatar = null, spin = 0.35, target = 0.35, dragging = false, lastX = 0, tilt = 0, tiltT = 0;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const loader = new GLTFLoader();
+  function loadAvatar(url, fallback){
+    loader.load(url, onAvatar, undefined, () => {
+      if (fallback) {
+        import('./lib/avatar-embed.js')
+          .then((m) => loadAvatar(m.default, null))
+          .catch(() => host.classList.add('failed'));
+      } else host.classList.add('failed');
+    });
+  }
+  function onAvatar(gltf) {
+    avatar = gltf.scene;
+
+    // centre on origin, scale so the figure is ~1.9 units tall
+    const box = new THREE.Box3().setFromObject(avatar);
+    const size = new THREE.Vector3(), centre = new THREE.Vector3();
+    box.getSize(size); box.getCenter(centre);
+    const s = 1.95 / size.y;
+    avatar.scale.setScalar(s);
+    avatar.position.set(-centre.x*s, -box.min.y*s - 0.96, -centre.z*s);
+
+    avatar.traverse((o) => {
+      if (o.isMesh && o.material) {
+        o.material.envMapIntensity = 0.8;
+        if (o.material.map) o.material.map.anisotropy = 4;
+      }
+    });
+
+    group.add(avatar);
+    host.classList.add('ready');
+  }
+  loadAvatar('./assets/avatar.glb', true);
+
+  // drag to rotate
+  const el = renderer.domElement;
+  el.addEventListener('pointerdown', (e) => { el.setPointerCapture(e.pointerId); dragging = true; lastX = e.clientX; });
+  el.addEventListener('pointermove', (e) => { if (!dragging) return; target += (e.clientX - lastX) * 0.009; lastX = e.clientX; });
+  el.addEventListener('pointerup',   () => { dragging = false; });
+  el.addEventListener('pointercancel', () => { dragging = false; });
+  host.addEventListener('pointermove', (e) => {
+    const r = host.getBoundingClientRect();
+    tiltT = ((e.clientY - r.top) / r.height - 0.5) * 0.2;
+  });
+  host.addEventListener('pointerleave', () => { tiltT = 0; });
+
+  let visible = true;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold:0 }).observe(host);
+  }
+
+  function resize(){
+    W = host.clientWidth; H = host.clientHeight - 26;
+    if (!W || !H) return;
+    camera.aspect = W/H; camera.updateProjectionMatrix(); renderer.setSize(W, H);
+  }
+  window.addEventListener('resize', resize);
+
+  let t = 0;
+  (function loop(){
+    requestAnimationFrame(loop);
+    if (!visible) return;
+    t += 0.016;
+    if (!dragging && !reduce) target += 0.0025;
+    spin += (target - spin) * 0.09;
+    tilt += (tiltT - tilt) * 0.06;
+    group.rotation.y = spin;
+    group.rotation.x = tilt;
+    group.position.y = reduce ? 0 : Math.sin(t * 0.8) * 0.035;
+    renderer.render(scene, camera);
+  })();
+  setTimeout(resize, 60);
+}
 </script>
