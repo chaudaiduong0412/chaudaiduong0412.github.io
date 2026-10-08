@@ -70,9 +70,9 @@ section{padding-block:clamp(70px,10vw,130px);position:relative;scroll-margin-top
 .rail-dot{width:15px;height:15px;border-radius:50%;background:var(--accent);flex:none;box-shadow:0 0 22px var(--glow)}
 .rail-bar{width:2px;flex:1;min-height:170px;background:linear-gradient(var(--accent),transparent)}
 @media(max-width:600px){.rail-line{display:none}}
-.hero h1{font-size:clamp(38px,7vw,70px);font-weight:800;letter-spacing:-.02em}
-.hero h1 span{color:var(--accent)}
-.hero .sub{color:var(--txt-2);font-size:clamp(16px,2.1vw,19px);font-weight:400;margin-top:16px;max-width:36ch}
+.hero h1{font-size:clamp(34px,5.4vw,58px);font-weight:800;letter-spacing:-.02em}
+.hero h1 span{color:var(--accent);display:block}
+.hero .sub{color:var(--txt-2);font-size:clamp(16px,2.1vw,19px);font-weight:400;margin-top:16px;max-width:42ch}
 .pill{
   display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);
   background:var(--card);border-radius:999px;padding:7px 16px;font-size:12.5px;
@@ -203,6 +203,54 @@ section{padding-block:clamp(70px,10vw,130px);position:relative;scroll-margin-top
 .strip{display:grid;grid-template-columns:1fr 1fr;gap:2px}
 .strip img{width:100%}
 
+/* drawings: thumbnail strip, inline button, lightbox */
+.drawstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line)}
+.drawstrip button{
+  position:relative;padding:0;border:0;background:#fff;cursor:zoom-in;aspect-ratio:4/3;overflow:hidden;display:block
+}
+.drawstrip img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.drawstrip button:hover img,.drawstrip button:focus-visible img{transform:scale(1.07)}
+.drawstrip button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.drawstrip .more{
+  position:absolute;inset:0;display:grid;place-items:center;background:rgba(5,8,22,.72);
+  color:#fff;font:600 15px var(--f);letter-spacing:.04em
+}
+.gal-btn{
+  display:inline-flex;align-items:center;gap:6px;margin-left:6px;vertical-align:baseline;
+  background:rgba(145,94,255,.14);border:1px solid rgba(145,94,255,.55);color:var(--accent-2);
+  font:600 13px var(--f);letter-spacing:.03em;padding:4px 13px;border-radius:999px;cursor:pointer;
+  transition:background .2s,color .2s,transform .18s;white-space:nowrap
+}
+.gal-btn:hover,.gal-btn:focus-visible{background:var(--accent);color:#fff;transform:translateY(-1px)}
+.gal-btn.block{margin:6px 0 0;padding:8px 16px;font-size:13.5px;align-self:flex-start}
+
+.lb{
+  position:fixed;inset:0;z-index:100;display:none;flex-direction:column;
+  background:rgba(5,8,22,.94);backdrop-filter:blur(6px)
+}
+.lb.open{display:flex}
+.lb-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px var(--gutter)}
+.lb-top h3{font-size:15px;font-weight:600;line-height:1.3}
+.lb-top small{display:block;color:var(--txt-2);font-weight:400;font-size:12.5px;margin-top:2px}
+.lb-x,.lb-nav{
+  background:var(--card-2);border:1px solid var(--line);color:#fff;border-radius:50%;
+  width:42px;height:42px;font-size:20px;cursor:pointer;flex:none;display:grid;place-items:center;transition:border-color .2s
+}
+.lb-x:hover,.lb-nav:hover{border-color:var(--accent)}
+.lb-main{flex:1;min-height:0;display:flex;align-items:center;gap:12px;padding:0 clamp(8px,2vw,28px)}
+.lb-stage{flex:1;min-width:0;height:100%;display:flex;align-items:center;justify-content:center}
+.lb-stage img{max-width:100%;max-height:100%;width:auto;height:auto;background:#fff;border-radius:6px;object-fit:contain}
+.lb-cap{padding:12px var(--gutter) 6px;text-align:center;color:var(--txt-2);font-size:14px}
+.lb-thumbs{display:flex;gap:8px;overflow-x:auto;padding:8px var(--gutter) 16px;justify-content:safe center}
+.lb-thumbs button{
+  flex:none;width:84px;height:60px;padding:0;border:2px solid transparent;border-radius:6px;
+  background:#fff;cursor:pointer;overflow:hidden;opacity:.6
+}
+.lb-thumbs button.on{border-color:var(--accent);opacity:1}
+.lb-thumbs img{width:100%;height:100%;object-fit:cover}
+@media(max-width:640px){.lb-nav{position:absolute;top:42%;z-index:2;background:rgba(16,13,37,.82);width:36px;height:36px}.lb-prev{left:6px}.lb-next{right:6px}.lb-main{padding:0 4px}}
+body.lb-lock{overflow:hidden}
+
 /* ---------- contact ---------- */
 .contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(26px,5vw,56px);margin-top:48px;align-items:start}
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
@@ -250,13 +298,14 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
   <div class="wrap nav-in">
     <a class="logo" href="#top">
       <span class="logo-mark">DC</span>
-      <span>Duong Dai Chau<small>Construction Management</small></span>
+      <span>Duong Dai Chau<small>Civil Engineering · CEM</small></span>
     </a>
     <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
     <ul id="menu">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -272,8 +321,8 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
         <div class="rail-line"><span class="rail-dot"></span><span class="rail-bar"></span></div>
         <div>
           <span class="pill"><span class="dot"></span>Open to Spring 2027 co-op &amp; Summer 2027 internship</span>
-          <h1>Hi, I'm <span>Duong Chau</span></h1>
-          <p class="sub">I ran the façade package on a 34-storey tower in Ho Chi Minh City. Now I'm at Georgia Tech, learning to run the whole job.</p>
+          <h1>Hi, I'm <span>Duong Dai Chau</span></h1>
+          <p class="sub">I'm a second-semester M.S. student in Civil Engineering (CEM track) at Georgia Tech, and a graduate research assistant in Dr. Tsai's lab.</p>
           <div class="cta">
             <a class="btn btn-fill" href="#work">View my work</a>
             <a class="btn btn-line" href="#contact">Get in touch</a>
@@ -298,9 +347,9 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
         <figcaption>RP 24-12 poster session · Georgia Institute of Technology</figcaption>
       </figure>
       <div class="rv">
-        <p>I'm a second-semester M.Eng. student in <strong>Construction Management at Georgia Tech</strong>, holding a 4.00, and a graduate research assistant under Prof. Yichang (James) Tsai.</p>
-        <p>I trained as a structural engineer at <strong>Ho Chi Minh City University of Technology</strong> on the structural and foundation track. My capstone was the full design of a 14-storey reinforced concrete apartment building — frame, beams, columns, slabs, staircases, rooftop water tank, down to the spun pile foundation.</p>
-        <p>Then I went to the field. A summer as a field engineer intern with <strong>Newtecons</strong> on Flora Mizuki, and a year with <strong>BM Windows</strong> as superintendent and project engineer on the Zeit River Thu Thiem façade package. I processed the RFIs and submittals, produced and reviewed the shop drawings, coordinated the trades, and held the fabrication–delivery–installation schedule together.</p>
+        <p>I'm a second-semester M.S. student in <strong>Civil Engineering at Georgia Tech</strong> on the Construction Engineering &amp; Management (CEM) track, graduating in December 2027, and a graduate research assistant under Prof. Yichang (James) Tsai on Georgia DOT projects. Before Georgia Tech I studied engineering management at SIUE and business administration (MBA) at DeVry University.</p>
+        <p>I trained as a structural engineer at <strong>Ho Chi Minh City University of Technology</strong> on the structural and foundation track. My capstone was the full design of a 14-storey reinforced concrete apartment building — frame, beams, columns, slabs, staircases, rooftop water tank, down to the spun pile foundation.<button type="button" class="gal-btn" data-gallery="capstone">View capstone drawings →</button></p>
+        <p>Then I went to the field. A summer as a field engineer intern with <strong>Newtecons</strong> on Flora Mizuki, and a year with <strong>BM Windows</strong> as superintendent and project engineer on the Zeit River Thu Thiem façade package. I processed the RFIs and submittals, produced and reviewed the shop drawings, coordinated the trades, and held the fabrication–delivery–installation schedule together.<button type="button" class="gal-btn" data-gallery="zeit">View Zeit shop drawings →</button></p>
         <p>That year taught me the thing design school cannot: a drawing is only worth what the crew can actually build from it at eleven o'clock on a wet morning.</p>
         <p>I'm looking for a <strong>Spring 2027 part-time co-op</strong> and a <strong>Summer 2027 internship</strong> in project engineering, field engineering, or VDC. As an international student I'm eligible to work under CPT, so no sponsorship is needed.</p>
       </div>
@@ -333,7 +382,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
 
     <div class="chips">
       <div class="chipbox rv"><h3>Design &amp; VDC</h3><ul>
-        <li>AutoCAD</li><li>Revit</li><li>BIM coordination</li><li>Shop drawings</li><li>Fabrication drawings</li><li>Clash resolution</li>
+        <li>AutoCAD</li><li>Revit</li><li>Bluebeam Revu</li><li>BIM coordination</li><li>Shop drawings</li><li>Fabrication drawings</li><li>Clash resolution</li>
       </ul></div>
       <div class="chipbox rv"><h3>Project Controls</h3><ul>
         <li>Submittals &amp; RFIs</li><li>Quantity take-offs</li><li>Cost estimation</li><li>Schedule coordination</li><li>Method statements</li>
@@ -369,6 +418,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
             <li>Lead researcher on GDOT RP 24-12, the economic analysis of RCUT access impacts on Georgia businesses.</li>
             <li>Built an Excel-based screening tool ranking 18 project factors across 7 categories.</li>
             <li>Leading the Curve Finder VIP student team on horizontal curve detection from roadway centreline geometry.</li>
+            <li>Observer on GDOT RP 26-06, a study of how bikeway types are selected in Georgia.</li>
           </ul>
         </div>
       </div>
@@ -385,6 +435,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
             <li>Coordinated trade contractors and installation crews across two towers of 34 and 27 storeys.</li>
             <li>Held the schedule across fabrication, delivery and installation, and inspected installed work for quality.</li>
           </ul>
+          <button type="button" class="gal-btn block" data-gallery="zeit">View Zeit shop drawings →</button>
         </div>
       </div>
 
@@ -402,10 +453,56 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION ================= -->
+  <section id="education" class="wrap">
+    <p class="eyebrow rv">Where I studied</p>
+    <h2 class="sec-h rv">Education</h2>
+
+    <div class="tl">
       <div class="tl-item rv">
         <span class="tl-mark"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
         <div class="tl-body">
-          <p class="tl-date">2018 – 2023</p>
+          <p class="tl-date">Spring 2026 – Dec 2027 (expected)</p>
+          <h3>M.S. Civil Engineering — CEM Track</h3>
+          <p class="tl-org">Georgia Institute of Technology · Atlanta, GA</p>
+          <ul>
+            <li>Construction Engineering &amp; Management (CEM) track.</li>
+            <li>Graduate research assistant in Prof. Yichang (James) Tsai's lab.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item rv">
+        <span class="tl-mark"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
+        <div class="tl-body">
+          <p class="tl-date">Spring 2025 – Dec 2025</p>
+          <h3>MBA</h3>
+          <p class="tl-org">DeVry University</p>
+          <ul>
+            <li>Master of Business Administration track.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item rv">
+        <span class="tl-mark"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
+        <div class="tl-body">
+          <p class="tl-date">Spring 2024 – Dec 2024</p>
+          <h3>M.S. Engineering Management</h3>
+          <p class="tl-org">Southern Illinois University Edwardsville (SIUE)</p>
+          <ul>
+            <li>Curriculum split about evenly between industrial engineering and MBA coursework.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item rv">
+        <span class="tl-mark"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
+        <div class="tl-body">
+          <p class="tl-date">Fall 2019 – Spring 2023</p>
           <h3>B.S. Civil Engineering — Structural &amp; Foundation Track</h3>
           <p class="tl-org">Ho Chi Minh City University of Technology (HCMUT)</p>
           <ul>
@@ -413,6 +510,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
             <li>Frame, beams, columns, slabs, staircases and rooftop water tank, on a precast spun pile foundation.</li>
             <li>Foundation engineering research alongside the degree programme.</li>
           </ul>
+          <button type="button" class="gal-btn block" data-gallery="capstone">View capstone drawings →</button>
         </div>
       </div>
     </div>
@@ -434,12 +532,19 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
             <img src="assets/zeit-towers.jpg" alt="Aerial view of the two Zeit River towers showing the continuous radiused corners" width="1400" height="788" loading="lazy">
             <img src="assets/zeit-team.jpg" alt="The BM Windows site management board team outside the site office" width="1200" height="925" loading="lazy">
           </div>
+          <div class="drawstrip" aria-label="Zeit shop drawings">
+            <button type="button" data-gallery="zeit" data-i="1" aria-label="Open key plan drawing"><img src="assets/zeit/keyplan-zone-b.jpg" alt="Key plan of door locations, floor 2, Zone B" loading="lazy"></button>
+            <button type="button" data-gallery="zeit" data-i="3" aria-label="Open elevation drawing"><img src="assets/zeit/elevation-glazing.jpg" alt="Elevation of a glazed fixed panel and door" loading="lazy"></button>
+            <button type="button" data-gallery="zeit" data-i="5" aria-label="Open detail drawing"><img src="assets/zeit/detail-sliding-track.jpg" alt="Sliding door track section detail" loading="lazy"></button>
+            <button type="button" data-gallery="zeit" data-i="7" aria-label="Open all drawings"><img src="assets/zeit/detail-corner.jpg" alt="Corner junction detail" loading="lazy"><span class="more">+4 drawings</span></button>
+          </div>
         </div>
         <div class="proj-in">
           <p class="proj-role">Superintendent / Project Engineer</p>
           <h3>Zeit River Thu Thiem</h3>
           <p>Two towers of 34 and 27 storeys for GS E&amp;C, wrapped in a dual-colour unitised aluminium façade whose signature detail is a continuous radiused corner. I held the package from shop drawing through fabrication, delivery and installation.</p>
           <div class="proj-tags"><span>#AutoCAD</span><span>#ShopDrawings</span><span>#RFIs</span><span>#SiteCoordination</span></div>
+          <button type="button" class="gal-btn block" data-gallery="zeit">View shop drawings →</button>
           <a class="proj-link" href="https://bmwindows.vn/en/zeit-river-thu-thiem" target="_blank" rel="noopener">Project page at BM Windows ↗</a>
         </div>
       </article>
@@ -480,6 +585,21 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
 
       <article class="proj rv">
         <div class="proj-media proj-art">
+          <svg viewBox="0 0 120 90" role="img" aria-label="Bicycle outline representing the bikeway type selection study">
+            <circle cx="30" cy="58" r="16"/><circle cx="90" cy="58" r="16"/>
+            <path d="M30 58 48 30h26l16 28M48 30l12 28h-30M74 30l-4-8h-9"/>
+          </svg>
+        </div>
+        <div class="proj-in">
+          <p class="proj-role">Observer · GDOT research</p>
+          <h3>RP 26-06 — Bikeway Type Selection</h3>
+          <p>Following a Georgia DOT study that quantitatively assesses how bikeway types are selected across Georgia, as an observer on Prof. Tsai's research team.</p>
+          <div class="proj-tags"><span>#GDOT</span><span>#Bikeways</span><span>#TransportationResearch</span></div>
+        </div>
+      </article>
+
+      <article class="proj rv">
+        <div class="proj-media proj-art">
           <svg viewBox="0 0 120 90" role="img" aria-label="VR headset outline representing virtual reality safety training">
             <path d="M22 34h76a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8H74l-8-8H54l-8 8H22a8 8 0 0 1-8-8V42a8 8 0 0 1 8-8Z"/>
             <path d="M34 46h14M72 46h14"/>
@@ -494,18 +614,22 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
       </article>
 
       <article class="proj rv">
-        <div class="proj-media proj-art">
-          <svg viewBox="0 0 120 90" role="img" aria-label="Elevation of a multi-storey frame on pile foundations">
-            <rect x="34" y="8" width="52" height="60"/>
-            <path d="M34 20h52M34 32h52M34 44h52M34 56h52M51 8v60M68 8v60"/>
-            <path d="M28 68h64M42 68v14M60 68v14M78 68v14"/>
-          </svg>
+        <div class="proj-media">
+          <span class="tag">Structural design</span>
+          <img src="assets/capstone/etabs-moment-1.jpg" alt="ETABS analysis output for the 14-storey capstone building" width="1520" height="1080" loading="lazy">
+          <div class="drawstrip" aria-label="Capstone drawings">
+            <button type="button" data-gallery="capstone" data-i="0" aria-label="Open architectural layout"><img src="assets/capstone/architecture-layout.jpg" alt="Architectural layout of a typical floor" loading="lazy"></button>
+            <button type="button" data-gallery="capstone" data-i="2" aria-label="Open foundation plan"><img src="assets/capstone/foundation-geotech.jpg" alt="Geotechnical profile and foundation plan" loading="lazy"></button>
+            <button type="button" data-gallery="capstone" data-i="3" aria-label="Open frame reinforcement"><img src="assets/capstone/frame-reinforcement.jpg" alt="Frame cross-section reinforcement detail" loading="lazy"></button>
+            <button type="button" data-gallery="capstone" data-i="4" aria-label="Open all drawings"><img src="assets/capstone/frame-model.jpg" alt="Frame model drawing" loading="lazy"><span class="more">+4 drawings</span></button>
+          </div>
         </div>
         <div class="proj-in">
           <p class="proj-role">B.S. capstone</p>
           <h3>14-Storey RC Apartment Building</h3>
           <p>Complete structural design — frame system, beams, columns, slabs, staircases and rooftop water tank — with a precast spun pile foundation carried from the soil report through pile capacity to pile cap detailing. Modelled in ETABS and SAP2000, with hand calculations verifying the model output.</p>
           <div class="proj-tags"><span>#ETABS</span><span>#SAP2000</span><span>#RCDesign</span><span>#Foundations</span></div>
+          <button type="button" class="gal-btn block" data-gallery="capstone">View capstone drawings →</button>
         </div>
       </article>
 
@@ -580,6 +704,21 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
   </div>
 </footer>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lb-title" aria-hidden="true">
+  <div class="lb-top">
+    <h3 id="lb-title"></h3>
+    <button type="button" class="lb-x" id="lb-close" aria-label="Close gallery">✕</button>
+  </div>
+  <div class="lb-main">
+    <button type="button" class="lb-nav lb-prev" id="lb-prev" aria-label="Previous drawing">‹</button>
+    <div class="lb-stage"><img id="lb-img" alt=""></div>
+    <button type="button" class="lb-nav lb-next" id="lb-next" aria-label="Next drawing">›</button>
+  </div>
+  <p class="lb-cap" id="lb-cap"></p>
+  <div class="lb-thumbs" id="lb-thumbs"></div>
+</div>
+
+<script src="three.min.js"></script>
 <script>
 (function(){
   'use strict';
@@ -644,139 +783,254 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
     else { draw=function(){}; cx.globalAlpha=.5; stars.forEach(function(s){cx.fillStyle='#cfc6ff';cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.283);cx.fill();}); }
   })();
 
-})();
-</script>
-
-<script type="importmap">
-{"imports":{"three":"./three.module.min.js"}}
-</script>
-<script type="module">
-import * as THREE from 'three';
-import { GLTFLoader } from './GLTFLoader.js';
-
-const host = document.getElementById('stage');
-if (host) {
-  let W = host.clientWidth, H = host.clientHeight - 26;
-
-  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.setSize(W, H);
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
-  host.insertBefore(renderer.domElement, host.firstChild);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(32, W/H, 0.1, 100);
-  camera.position.set(0, 0.12, 3.5);
-  camera.lookAt(0, -0.04, 0);
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const PURPLE = 0x915eff;
-
-  // lighting: neutral key, purple rim, cool fill
-  scene.add(new THREE.HemisphereLight(0xdfd6ff, 0x1a1436, 1.5));
-  const key = new THREE.DirectionalLight(0xffffff, 2.4);
-  key.position.set(2.4, 3.2, 3.4); scene.add(key);
-  const rim = new THREE.DirectionalLight(PURPLE, 3.2);
-  rim.position.set(-3, 1.6, -2.6); scene.add(rim);
-  const fill = new THREE.DirectionalLight(0x74c7ff, 0.9);
-  fill.position.set(-2.2, 0.4, 2.6); scene.add(fill);
-
-  // ground: glow disc + grid
-  const gcv = document.createElement('canvas'); gcv.width = gcv.height = 128;
-  const gx = gcv.getContext('2d');
-  const grd = gx.createRadialGradient(64, 64, 0, 64, 64, 64);
-  grd.addColorStop(0, 'rgba(145,94,255,0.55)');
-  grd.addColorStop(0.45, 'rgba(145,94,255,0.16)');
-  grd.addColorStop(1, 'rgba(145,94,255,0)');
-  gx.fillStyle = grd; gx.fillRect(0, 0, 128, 128);
-  const glowTex = new THREE.CanvasTexture(gcv);
-  const disc = new THREE.Mesh(
-    new THREE.PlaneGeometry(2.4, 2.4),
-    new THREE.MeshBasicMaterial({ map:glowTex, transparent:true, depthWrite:false })
-  );
-  disc.rotation.x = -Math.PI/2; disc.position.y = -0.955; group.add(disc);
-
-  const grid = new THREE.GridHelper(6, 14, PURPLE, 0x2a2350);
-  grid.material.transparent = true; grid.material.opacity = 0.14;
-  grid.position.y = -0.96; group.add(grid);
-
-  let avatar = null, spin = 0.35, target = 0.35, dragging = false, lastX = 0, tilt = 0, tiltT = 0;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const loader = new GLTFLoader();
-  function loadAvatar(url, fallback){
-    loader.load(url, onAvatar, undefined, () => {
-      if (fallback) {
-        import('./avatar-embed.js')
-          .then((m) => loadAvatar(m.default, null))
-          .catch(() => host.classList.add('failed'));
-      } else host.classList.add('failed');
-    });
-  }
-  function onAvatar(gltf) {
-    avatar = gltf.scene;
-
-    // centre on origin, scale so the figure is ~1.9 units tall
-    const box = new THREE.Box3().setFromObject(avatar);
-    const size = new THREE.Vector3(), centre = new THREE.Vector3();
-    box.getSize(size); box.getCenter(centre);
-    const s = 1.95 / size.y;
-    avatar.scale.setScalar(s);
-    avatar.position.set(-centre.x*s, -box.min.y*s - 0.96, -centre.z*s);
-
-    avatar.traverse((o) => {
-      if (o.isMesh && o.material) {
-        o.material.envMapIntensity = 0.8;
-        if (o.material.map) o.material.map.anisotropy = 4;
+  /* ---------- drawing galleries (lightbox) ---------- */
+  (function(){
+    var G={
+      zeit:{
+        title:'Zeit River Thu Thiem — façade shop drawings',
+        sub:'BM Windows · as-built submission set, towers T1 and T2',
+        items:[
+          ['assets/zeit/cover.jpg','Submission cover — Zeit River Thu Thiem façade package'],
+          ['assets/zeit/keyplan-zone-b.jpg','Key plan — door locations, floor 2, Zone B'],
+          ['assets/zeit/keyplan-floor3.jpg','Key plan — sliding doors on axes Y3 and Y65, floor 3, Zone B'],
+          ['assets/zeit/elevation-glazing.jpg','Elevation — glazed panel and door, Zone B'],
+          ['assets/zeit/elevation-sliding-door.jpg','Elevation — sliding door, floor 3, Zone B'],
+          ['assets/zeit/detail-sliding-track.jpg','Section detail — sliding door, floor 3, Zone B'],
+          ['assets/zeit/detail-plan-section.jpg','Plan and section detail — sliding system, Zone B'],
+          ['assets/zeit/detail-corner.jpg','Junction detail — Zone B']
+        ]
+      },
+      capstone:{
+        title:'14-storey RC apartment building — capstone drawings',
+        sub:'HCMUT · structural design, B.S. Civil Engineering',
+        items:[
+          ['assets/capstone/architecture-layout.jpg','Architectural layout — typical floor'],
+          ['assets/capstone/beam-column-layout.jpg','Beam layout and column layout — typical floor'],
+          ['assets/capstone/foundation-geotech.jpg','Geotechnical profile and foundation plan'],
+          ['assets/capstone/frame-reinforcement.jpg','Frame cross-section — beam and column reinforcement'],
+          ['assets/capstone/frame-model.jpg','Frame reinforcement drawing (full-size sheet)'],
+          ['assets/capstone/slab-model.jpg','Slab reinforcement drawing (full-size sheet)'],
+          ['assets/capstone/etabs-moment-1.jpg','ETABS analysis output'],
+          ['assets/capstone/etabs-moment-3.jpg','ETABS analysis output — structural model']
+        ]
       }
+    };
+    var lb=document.getElementById('lb'), img=document.getElementById('lb-img'),
+        cap=document.getElementById('lb-cap'), ttl=document.getElementById('lb-title'),
+        th=document.getElementById('lb-thumbs'), cur=null, idx=0, opener=null;
+
+    function show(i){
+      var set=G[cur]; idx=(i+set.items.length)%set.items.length;
+      img.src=set.items[idx][0]; img.alt=set.items[idx][1];
+      cap.textContent=(idx+1)+' / '+set.items.length+' · '+set.items[idx][1];
+      [].forEach.call(th.children,function(b,k){ b.classList.toggle('on',k===idx); });
+      var on=th.children[idx]; if(on && on.scrollIntoView) on.scrollIntoView({block:'nearest',inline:'center'});
+    }
+    function open(name,i,from){
+      if(!G[name]) return;
+      cur=name; opener=from||null;
+      var set=G[name];
+      ttl.innerHTML=''; ttl.appendChild(document.createTextNode(set.title));
+      var s=document.createElement('small'); s.textContent=set.sub; ttl.appendChild(s);
+      th.innerHTML='';
+      set.items.forEach(function(it,k){
+        var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Show drawing '+(k+1));
+        var im=document.createElement('img'); im.src=it[0]; im.alt=''; im.loading='lazy'; b.appendChild(im);
+        b.addEventListener('click',function(){ show(k); });
+        th.appendChild(b);
+      });
+      lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
+      document.body.classList.add('lb-lock');
+      show(i||0);
+      document.getElementById('lb-close').focus();
+    }
+    function close(){
+      lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
+      document.body.classList.remove('lb-lock'); img.removeAttribute('src');
+      if(opener && opener.focus) opener.focus();
+    }
+    document.addEventListener('click',function(e){
+      var t=e.target.closest ? e.target.closest('[data-gallery]') : null;
+      if(t) open(t.getAttribute('data-gallery'),parseInt(t.getAttribute('data-i')||'0',10),t);
     });
-
-    group.add(avatar);
-    host.classList.add('ready');
-  }
-  loadAvatar('./assets/avatar.glb', true);
-
-  // drag to rotate
-  const el = renderer.domElement;
-  el.addEventListener('pointerdown', (e) => { el.setPointerCapture(e.pointerId); dragging = true; lastX = e.clientX; });
-  el.addEventListener('pointermove', (e) => { if (!dragging) return; target += (e.clientX - lastX) * 0.009; lastX = e.clientX; });
-  el.addEventListener('pointerup',   () => { dragging = false; });
-  el.addEventListener('pointercancel', () => { dragging = false; });
-  host.addEventListener('pointermove', (e) => {
-    const r = host.getBoundingClientRect();
-    tiltT = ((e.clientY - r.top) / r.height - 0.5) * 0.2;
-  });
-  host.addEventListener('pointerleave', () => { tiltT = 0; });
-
-  let visible = true;
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold:0 }).observe(host);
-  }
-
-  function resize(){
-    W = host.clientWidth; H = host.clientHeight - 26;
-    if (!W || !H) return;
-    camera.aspect = W/H; camera.updateProjectionMatrix(); renderer.setSize(W, H);
-  }
-  window.addEventListener('resize', resize);
-
-  let t = 0;
-  (function loop(){
-    requestAnimationFrame(loop);
-    if (!visible) return;
-    t += 0.016;
-    if (!dragging && !reduce) target += 0.0025;
-    spin += (target - spin) * 0.09;
-    tilt += (tiltT - tilt) * 0.06;
-    group.rotation.y = spin;
-    group.rotation.x = tilt;
-    group.position.y = reduce ? 0 : Math.sin(t * 0.8) * 0.035;
-    renderer.render(scene, camera);
+    document.getElementById('lb-close').addEventListener('click',close);
+    document.getElementById('lb-prev').addEventListener('click',function(){ show(idx-1); });
+    document.getElementById('lb-next').addEventListener('click',function(){ show(idx+1); });
+    lb.addEventListener('click',function(e){ if(e.target===lb || e.target.classList.contains('lb-stage') || e.target.classList.contains('lb-main')) close(); });
+    document.addEventListener('keydown',function(e){
+      if(!lb.classList.contains('open')) return;
+      if(e.key==='Escape') close();
+      else if(e.key==='ArrowLeft') show(idx-1);
+      else if(e.key==='ArrowRight') show(idx+1);
+    });
+    var sx=null;
+    lb.addEventListener('touchstart',function(e){ sx=e.touches[0].clientX; },{passive:true});
+    lb.addEventListener('touchend',function(e){
+      if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; sx=null;
+      if(Math.abs(dx)>50) show(idx+(dx<0?1:-1));
+    });
   })();
-  setTimeout(resize, 60);
-}
+
+  /* ---------- 3D tower ---------- */
+  (function(){
+    if(typeof THREE==='undefined') return;
+    var host=document.getElementById('stage');
+    var W=host.clientWidth, H=host.clientHeight;
+    var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    renderer.setSize(W,H);
+    host.insertBefore(renderer.domElement,host.firstChild);
+
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(38,W/H,.1,200);
+    camera.position.set(0,5.4,23.5);
+    camera.lookAt(0,2.0,0);
+
+    var group=new THREE.Group(); scene.add(group);
+
+    var PURPLE=0x915eff, LILAC=0xb794ff;
+
+    // --- one tower: glass body + floor lines + mullions ---
+    function tower(w,d,floors,fh,x,z,radius){
+      var g=new THREE.Group();
+      var h=floors*fh;
+
+      var shape=new THREE.Shape();
+      var hw=w/2, hd=d/2, r=radius;
+      shape.moveTo(-hw+r,-hd);
+      shape.lineTo(hw,-hd);
+      shape.lineTo(hw,hd);
+      shape.lineTo(-hw,hd);
+      shape.lineTo(-hw,-hd+r);
+      shape.absarc(-hw+r,-hd+r,r,Math.PI,Math.PI*1.5,false);
+
+      var body=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false,curveSegments:14});
+      body.rotateX(-Math.PI/2);
+      var glass=new THREE.Mesh(body,new THREE.MeshPhysicalMaterial({
+        color:0x2a2160,metalness:.25,roughness:.15,transmission:.55,thickness:1.2,
+        transparent:true,opacity:.62,clearcoat:.6
+      }));
+      glass.position.set(0,0,0);
+      g.add(glass);
+
+      var edges=new THREE.LineSegments(
+        new THREE.EdgesGeometry(body,18),
+        new THREE.LineBasicMaterial({color:LILAC,transparent:true,opacity:.75})
+      );
+      g.add(edges);
+
+      // floor slabs as thin outlines
+      var pts=[];
+      for(var f=1;f<floors;f++){
+        var y=f*fh;
+        pts.push(-hw+r,y,-hd, hw,y,-hd,  hw,y,-hd, hw,y,hd,  hw,y,hd, -hw,y,hd,  -hw,y,hd, -hw,y,-hd+r);
+        var seg=8;
+        for(var s2=0;s2<seg;s2++){
+          var a0=Math.PI+(Math.PI/2)*(s2/seg), a1=Math.PI+(Math.PI/2)*((s2+1)/seg);
+          pts.push(-hw+r+Math.cos(a0)*r, y, -hd+r+Math.sin(a0)*r,
+                   -hw+r+Math.cos(a1)*r, y, -hd+r+Math.sin(a1)*r);
+        }
+      }
+      var fg=new THREE.BufferGeometry();
+      fg.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
+      g.add(new THREE.LineSegments(fg,new THREE.LineBasicMaterial({color:PURPLE,transparent:true,opacity:.42})));
+
+      // a few lit panes
+      var lit=new THREE.MeshBasicMaterial({color:LILAC,transparent:true,opacity:.5,side:THREE.DoubleSide});
+      for(var k=0;k<Math.round(floors*.7);k++){
+        var pane=new THREE.Mesh(new THREE.PlaneGeometry(w*.17,fh*.6),lit);
+        var fl=1+Math.floor(Math.random()*(floors-1));
+        var side=Math.floor(Math.random()*4);
+        var yy=fl*fh+fh*.5;
+        var off=(Math.random()-.5)*(w*.62);
+        if(side===0){ pane.position.set(off,yy,hd+.01); }
+        else if(side===1){ pane.position.set(off,yy,-hd-.01); pane.rotation.y=Math.PI; }
+        else if(side===2){ pane.position.set(hw+.01,yy,off*(d/w)); pane.rotation.y=Math.PI/2; }
+        else { pane.position.set(-hw-.01,yy,off*(d/w)); pane.rotation.y=-Math.PI/2; }
+        g.add(pane);
+      }
+
+      // crown
+      var crown=new THREE.Mesh(
+        new THREE.BoxGeometry(w*.34,fh*.9,d*.34),
+        new THREE.MeshStandardMaterial({color:0x3a2f7a,metalness:.5,roughness:.4})
+      );
+      crown.position.set(0,h+fh*.45,0);
+      g.add(crown);
+
+      g.position.set(x,0,z);
+      return g;
+    }
+
+    group.add(tower(3.4,3.0,17,.42,-2.3,0,.9));
+    group.add(tower(3.0,2.6,13,.42, 2.4,-1.1,.8));
+
+    // podium
+    var pod=new THREE.Mesh(
+      new THREE.BoxGeometry(9.6,.9,6.2),
+      new THREE.MeshStandardMaterial({color:0x1a1642,metalness:.3,roughness:.6})
+    );
+    pod.position.set(0,-.45,-.4); group.add(pod);
+    group.add(new THREE.LineSegments(
+      new THREE.EdgesGeometry(pod.geometry),
+      new THREE.LineBasicMaterial({color:PURPLE,transparent:true,opacity:.5})
+    ).translateY(-.45).translateZ(-.4));
+
+    // ground grid
+    var grid=new THREE.GridHelper(40,40,PURPLE,0x2a2350);
+    grid.material.transparent=true; grid.material.opacity=.16;
+    grid.position.y=-.92; group.add(grid);
+
+    group.position.y=-3.1;
+
+    scene.add(new THREE.AmbientLight(0x8f7fd8,1.1));
+    var key=new THREE.DirectionalLight(0xffffff,1.5); key.position.set(6,12,9); scene.add(key);
+    var rim=new THREE.PointLight(PURPLE,60,60); rim.position.set(-8,6,-6); scene.add(rim);
+    var warm=new THREE.PointLight(0x6ad1ff,25,50); warm.position.set(9,3,7); scene.add(warm);
+
+    /* drag to rotate */
+    var rot=0.5, target=0.5, vel=0, dragging=false, lastX=0, tilt=0, tiltT=0;
+    var el=renderer.domElement;
+    function down(x,y){ dragging=true; lastX=x; vel=0; }
+    function move(x){ if(!dragging) return; var dx=x-lastX; lastX=x; target+=dx*.008; vel=dx*.008; }
+    function up(){ dragging=false; }
+    el.addEventListener('pointerdown',function(e){ el.setPointerCapture(e.pointerId); down(e.clientX,e.clientY); });
+    el.addEventListener('pointermove',function(e){ move(e.clientX); });
+    el.addEventListener('pointerup',up); el.addEventListener('pointercancel',up);
+    host.addEventListener('pointermove',function(e){
+      var r=host.getBoundingClientRect();
+      tiltT=((e.clientY-r.top)/r.height-.5)*.34;
+    });
+    host.addEventListener('pointerleave',function(){ tiltT=0; });
+
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var visible=true;
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:0}).observe(host);
+    }
+
+    function resize(){
+      W=host.clientWidth; H=host.clientHeight;
+      if(!W||!H) return;
+      camera.aspect=W/H; camera.updateProjectionMatrix(); renderer.setSize(W,H);
+    }
+    window.addEventListener('resize',resize);
+
+    var t=0;
+    function loop(){
+      requestAnimationFrame(loop);
+      if(!visible) return;
+      t+=.016;
+      if(!dragging && !reduce) target+=0.0022;
+      rot+=(target-rot)*.09;
+      tilt+=(tiltT-tilt)*.06;
+      group.rotation.y=rot;
+      group.rotation.x=tilt;
+      group.position.y=-3.1+(reduce?0:Math.sin(t*.8)*.09);
+      renderer.render(scene,camera);
+    }
+    loop();
+    setTimeout(resize,60);
+  })();
+})();
 </script>
