@@ -1618,7 +1618,7 @@ if (host) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(32, W/H, 0.1, 100);
-  camera.position.set(0, 0.12, 3.5);
+  camera.position.set(0, 0.35, 4.6);   // far enough back that the whole scanned room stays in frame
   camera.lookAt(0, -0.04, 0);
 
   const group = new THREE.Group();
@@ -1645,11 +1645,11 @@ if (host) {
     new THREE.PlaneGeometry(2.4, 2.4),
     new THREE.MeshBasicMaterial({ map:new THREE.CanvasTexture(gcv), transparent:true, depthWrite:false })
   );
-  disc.rotation.x = -Math.PI/2; disc.position.y = -0.955; group.add(disc);
+  disc.rotation.x = -Math.PI/2; disc.position.y = -0.955;   // not shown: the room scan has its own floor
 
   const grid = new THREE.GridHelper(6, 14, ACCENT, 0x244058);
   grid.material.transparent = true; grid.material.opacity = 0.14;
-  grid.position.y = -0.96; group.add(grid);
+  grid.position.y = -0.96;
 
   // pulsing survey rings on the ground
   const rings = [];
@@ -1658,7 +1658,7 @@ if (host) {
       new THREE.RingGeometry(0.98, 1, 64),
       new THREE.MeshBasicMaterial({ color:ACCENT, transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false })
     );
-    r.rotation.x = -Math.PI/2; r.position.y = -0.95; group.add(r); rings.push(r);
+    r.rotation.x = -Math.PI/2; r.position.y = -0.95;
   }
 
   let avatar = null, spin = 0.35, target = 0.35, dragging = false, lastX = 0, tilt = 0, tiltT = 0, intro = 0;
