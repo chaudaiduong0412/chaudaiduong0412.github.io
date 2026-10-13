@@ -432,6 +432,13 @@ section{padding-block:clamp(70px,10vw,130px);position:relative;scroll-margin-top
 .cs-nums div{background:linear-gradient(145deg,rgba(245,181,71,.1),rgba(245,181,71,.02));border:1px solid rgba(245,181,71,.3);border-radius:12px;padding:12px 14px}
 .cs-nums b{display:block;font-size:22px;font-weight:800;color:var(--warm);letter-spacing:-.01em;line-height:1.2}
 .cs-nums span{font:500 11px var(--mono);color:var(--txt-2);line-height:1.45;display:block;margin-top:4px}
+.cs-docs{display:grid;gap:10px}
+.doc{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:14px;align-items:center;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;transition:border-color .25s,transform .25s var(--ease)}
+.doc:hover{border-color:var(--warm);transform:translateY(-2px)}
+.doc-ic{width:48px;height:56px;border-radius:8px;display:grid;place-items:center;font:600 12px var(--mono);color:#1a1205;background:linear-gradient(160deg,var(--warm),#d9902a);clip-path:polygon(0 0,72% 0,100% 22%,100% 100%,0 100%)}
+.doc b{display:block;font-size:14.5px;font-weight:600;line-height:1.35}
+.doc small{display:block;font:500 11px var(--mono);color:var(--txt-2);margin-top:3px}
+.doc-go{font:500 12px var(--mono);color:var(--warm);white-space:nowrap}
 .cs-cite{font-family:var(--mono);font-size:12.5px!important;line-height:1.7;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .cs-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:30px}
 .cs-tags span{font:500 11.5px var(--mono);color:var(--accent-2);background:rgba(137,208,240,.07);border:1px solid rgba(137,208,240,.18);padding:4px 9px;border-radius:6px}
@@ -616,12 +623,12 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
           <h3>Graduate Research Assistant</h3>
           <p class="tl-org">Georgia Institute of Technology · Prof. Yichang (James) Tsai</p>
           <ul>
-            <li>Lead researcher on GDOT RP 24-12, the economic analysis of RCUT access impacts on Georgia businesses.</li>
+            <li>Lead researcher on GDOT RP 24-12, the economic analysis of RCUT access impacts on Georgia businesses; final report (FHWA-GA-26-2412) approved September 2026.</li>
             <li>Built an Excel-based screening tool ranking 18 project factors across 7 categories.</li>
             <li>Leading the Curve Finder VIP student team on horizontal curve detection from roadway centreline geometry.</li>
             <li>Observer on GDOT RP 26-06, a study of how bikeway types are selected in Georgia.</li>
           </ul>
-          <div class="tl-actions"><button type="button" class="gal-btn block" data-cs="rcut">RP 24-12 case study →</button><button type="button" class="gal-btn block" data-cs="curve">Curve Finder →</button></div>
+          <div class="tl-actions"><button type="button" class="gal-btn block" data-cs="rcut">RP 24-12 case study →</button><a class="gal-btn block warm" href="assets/docs/GDOT-RP24-12-Final-Report.pdf" target="_blank" rel="noopener">Final report ↗</a><button type="button" class="gal-btn block" data-cs="curve">Curve Finder →</button></div>
         </div>
       </div>
 
@@ -792,7 +799,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
           <h3>Tan Thinh Loi Apartment — 14-Storey RC</h3>
           <p>Slabs, frames, stairs and rooftop tank to Eurocode 2, on D900 spun piles to −60.9 m, compared against a bored pile option under Eurocode 7.</p>
           <div class="proj-tags"><span>ETABS</span><span>Eurocode 2 &amp; 7</span><span>RC design</span><span>Spun piles</span></div>
-          <div class="proj-foot"><button type="button" class="gal-btn block warm" data-cs="capstone">Case study →</button><button type="button" class="gal-btn block" data-gallery="capstone">Drawings</button></div>
+          <div class="proj-foot"><button type="button" class="gal-btn block warm" data-cs="capstone">Case study →</button><button type="button" class="gal-btn block" data-gallery="capstone">Drawings</button><a class="gal-btn block" href="assets/docs/Capstone-Tan-Thinh-Loi-Drawings.pdf" target="_blank" rel="noopener">PDF ↗</a></div>
         </div>
       </article>
 
@@ -812,7 +819,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
           <h3>Shaft-Grouted Bored Piles</h3>
           <p>A load-transfer method for shaft-grouted piles, validated on full-scale tests at Friendship Tower. Grouting raised ultimate capacity about 1.7–2×.</p>
           <div class="proj-tags"><span>Geotechnical</span><span>t–z analysis</span><span>JOMC 2022</span></div>
-          <div class="proj-foot"><button type="button" class="gal-btn block" data-cs="piles">Case study →</button></div>
+          <div class="proj-foot"><button type="button" class="gal-btn block" data-cs="piles">Case study →</button><a class="gal-btn block warm" href="https://vjol.info.vn/tcvienvatlieu/article/view/94331" target="_blank" rel="noopener">Read the paper ↗</a></div>
         </div>
       </article>
 
@@ -827,7 +834,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
           <h3>RP 24-12 — RCUT Access Impacts</h3>
           <p>How RCUT intersections affect nearby Georgia businesses, across property values, nighttime lights, accessibility decay and surveys.</p>
           <div class="proj-tags"><span>Python</span><span>ArcGIS</span><span>DiD</span><span>Accessibility</span></div>
-          <div class="proj-foot"><button type="button" class="gal-btn block" data-cs="rcut">Case study →</button></div>
+          <div class="proj-foot"><button type="button" class="gal-btn block" data-cs="rcut">Case study →</button><a class="gal-btn block warm" href="assets/docs/GDOT-RP24-12-Final-Report.pdf" target="_blank" rel="noopener">Final report (PDF) ↗</a></div>
         </div>
       </article>
 
@@ -1459,6 +1466,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
         ['Trusting the model','ETABS always gives you a number. Hand-checking slab moments and member reinforcement is what tells you whether that number is right.']
       ],
       took:'Designing a building from slab to pile tip is why I can read a shop drawing and see the structure behind it. It is also why I check the arithmetic before I say what it means.',
+      docs:[['Capstone drawing set — Tan Thinh Loi Apartment','assets/docs/Capstone-Tan-Thinh-Loi-Drawings.pdf','PDF · 12 sheets · 3.5 MB']],
       tags:['ETABS','SAP2000','AutoCAD','Eurocode 2','Eurocode 7','RC design','Spun piles','Bored piles','Settlement analysis']
     },
     piles:{
@@ -1481,17 +1489,20 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
       ],
       took:'My first research habit: a model is only as good as the field test it survives, and you should say where your data stops.',
       cite:'Lai Van Qui, Nguyen Dang Khoa, Tran Quoc Viet, Nguyen Hoang Huy, Chau Dai Duong, Ngo Nguyen Hao Kiet (2022). "Phân tích hiệu quả cọc có phụt vữa thân cọc bằng phương pháp load–transfer" [Analysis of the effectiveness of shaft-grouted piles using the load-transfer method]. Tạp chí Vật liệu & Xây dựng (JOMC), 12(05), 42–49.',
+      docs:[['Read the paper on Vietnam Journals Online','https://vjol.info.vn/tcvienvatlieu/article/view/94331','Official journal page · free full text']],
       tags:['Geotechnical','Load-transfer (t–z)','Shaft grouting','Bored piles','Static load test','TCVN 10304','Research paper']
     },
     rcut:{
       kicker:'Research · Georgia DOT', role:'Lead researcher · Georgia Tech, Prof. Yichang (James) Tsai',
       title:'RP 24-12 — RCUT Access Impacts',
       hero:'assets/poster-session.jpg', gallery:'rcut',
-      lead:'Restricted Crossing U-Turn (RCUT) intersections improve safety, but businesses worry about lost access. GDOT RP 24-12 measures the economic effect on nearby Georgia businesses, and gives GDOT a way to screen future RCUT projects.',
-      facts:[['Period','Jan 2026 – Present'],['Sponsor','Georgia DOT'],['Methods','4 independent lines'],['Final report','July 2026']],
+      lead:'Restricted Crossing U-Turn (RCUT) intersections improve traffic operations, but businesses worry that changing how customers get in and out will cost them revenue. Sales tax data is confidential under Georgia law, so RP 24-12 measured the effect at eight Georgia RCUT locations with four indirect methods. The answer: no significant harm for most commercial businesses, with local negative effects where the detour is long. The final report was approved by GDOT in September 2026.',
+      facts:[['Report no.','FHWA-GA-26-2412'],['Sponsor','GDOT · FHWA'],['Published','October 2026 · 166 pp.'],['Authors','Tsai, Yang, Diaz, Chau, Cheng, Balkaran, Chimmili']],
+      nums:[['8','RCUT locations studied'],['4','independent methods'],['7','screening categories'],['18','factors in the screening tool']],
       owned:[
         'Lead contributor to the RCUT Economic Impact Screening & Analysis Guideline — an Excel scoring tool that ranks 18 factors across 7 categories and routes each project to exit or Phase 2 analysis.',
-        'Lead author of Chapter 5 §5.5–5.7 (accessibility metrics, distance-decay calibration) and Chapter 7 (pilot and case-study economic analysis).',
+        'Wrote the accessibility analysis (distance-decay calibration) and the pilot case-study economic analysis.',
+        'Coordinated the final deliverable with GDOT\'s Office of Performance-based Management and Research through approval.',
         'Analysis across four methods: parcel-level property value difference-in-differences, VIIRS nighttime lights, a detour-based accessibility decay model, and a business and resident survey.'
       ],
       hard:[
@@ -1499,6 +1510,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
         ['A tool someone else will use','The screening tool had to be simple enough for a GDOT engineer to run without us, so every factor needed a clear definition and score.']
       ],
       took:'Research for an owner is project delivery: a deadline, a client, and a deliverable that has to work without you in the room.',
+      docs:[['GDOT RP 24-12 Final Report','assets/docs/GDOT-RP24-12-Final-Report.pdf','PDF · 166 pages · 3.9 MB']],
       tags:['Python','ArcGIS','Excel','Difference-in-differences','Accessibility','GDOT']
     },
     curve:{
@@ -1547,6 +1559,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
     if(d.hard) h+='<div class="cs-sec"><h3><i>02</i> What made it hard</h3><div class="cs-hard">'+d.hard.map(function(o){ return '<div><b>'+esc(o[0])+'</b><span>'+esc(o[1])+'</span></div>'; }).join('')+'</div></div>';
     if(d.took) h+='<div class="cs-sec"><h3><i>03</i> What I took away</h3><p>'+esc(d.took)+'</p></div>';
     if(d.gallery) h+='<div class="cs-sec"><h3><i>04</i> Drawings &amp; photos</h3><div class="cs-gal">'+G[d.gallery].items.map(function(it,k){ return '<button type="button" data-gallery="'+d.gallery+'" data-i="'+k+'" aria-label="Open '+esc(it[1])+'"><img src="'+it[0]+'" alt="" loading="lazy"></button>'; }).join('')+'</div></div>';
+    if(d.docs) h+='<div class="cs-sec"><h3><i>⤓</i> Documents</h3><div class="cs-docs">'+d.docs.map(function(x){ return '<a class="doc" href="'+x[1]+'" target="_blank" rel="noopener"><span class="doc-ic">'+(/\.pdf$/.test(x[1])?'PDF':'↗')+'</span><span><b>'+esc(x[0])+'</b><small>'+esc(x[2])+'</small></span><span class="doc-go">Open ↗</span></a>'; }).join('')+'</div></div>';
     if(d.cite) h+='<div class="cs-sec"><h3><i>§</i> Publication</h3><p class="cs-cite">'+esc(d.cite)+'</p></div>';
     if(d.tags) h+='<div class="cs-tags">'+d.tags.map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div>';
     if(d.link) h+='<p style="margin-top:18px"><a class="proj-link" href="'+d.link[1]+'" target="_blank" rel="noopener">'+esc(d.link[0])+'</a></p>';
