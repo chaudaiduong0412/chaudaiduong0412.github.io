@@ -1679,7 +1679,7 @@ if (host) {
     const box = new THREE.Box3().setFromObject(avatar);
     const size = new THREE.Vector3(), centre = new THREE.Vector3();
     box.getSize(size); box.getCenter(centre);
-    const s = 1.95 / size.y;
+    const s = 1;   // keep the scan at its original scale; seen from further away the face reads better
     avatar.scale.setScalar(s);
     avatar.position.set(-centre.x*s, -box.min.y*s - 0.96, -centre.z*s);
     avatar.userData.y = avatar.position.y;
