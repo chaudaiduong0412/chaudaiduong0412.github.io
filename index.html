@@ -428,6 +428,11 @@ section{padding-block:clamp(70px,10vw,130px);position:relative;scroll-margin-top
 .cs-gal button{padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in;aspect-ratio:4/3}
 .cs-gal img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .cs-gal button:hover img{transform:scale(1.08)}
+.cs-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.cs-nums div{background:linear-gradient(145deg,rgba(245,181,71,.1),rgba(245,181,71,.02));border:1px solid rgba(245,181,71,.3);border-radius:12px;padding:12px 14px}
+.cs-nums b{display:block;font-size:22px;font-weight:800;color:var(--warm);letter-spacing:-.01em;line-height:1.2}
+.cs-nums span{font:500 11px var(--mono);color:var(--txt-2);line-height:1.45;display:block;margin-top:4px}
+.cs-cite{font-family:var(--mono);font-size:12.5px!important;line-height:1.7;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .cs-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:30px}
 .cs-tags span{font:500 11.5px var(--mono);color:var(--accent-2);background:rgba(137,208,240,.07);border:1px solid rgba(137,208,240,.18);padding:4px 9px;border-radius:6px}
 .cs-nav{display:flex;justify-content:space-between;gap:10px;margin-top:40px;border-top:1px solid var(--line);padding-top:20px}
@@ -658,9 +663,9 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
           <h3>Research Assistant — Foundation Engineering</h3>
           <p class="tl-org">Ho Chi Minh City University of Technology</p>
           <ul>
-            <li>Proposed a simplified load-transfer model for shaft-grouted bored piles.</li>
-            <li>Verified it against full-scale pile load test case studies in Ho Chi Minh City.</li>
-            <li>Co-author of a paper on analysing piles with a mortared pile body by the load-transfer method.</li>
+            <li>Load-transfer (t–z) analysis of shaft-grouted bored piles, in Dr. Lai Van Qui's foundation group.</li>
+            <li>Validated against full-scale static load tests at Friendship Tower, District 1 (piles tested to 3,000+ t).</li>
+            <li>Co-author, JOMC Vol. 12 No. 05 (2022): grouting raised ultimate pile capacity by about 1.7–2×.</li>
           </ul>
           <div class="tl-actions"><button type="button" class="gal-btn block" data-cs="piles">Research details →</button></div>
         </div>
@@ -779,14 +784,14 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
       <article class="proj rv" data-cat="structural" data-cs="capstone">
         <div class="proj-media">
           <span class="tag">Structural design</span>
-          <img src="assets/capstone/etabs-moment-1.jpg" alt="ETABS analysis output for the 14-storey capstone building" width="1520" height="1076" loading="lazy">
+          <img src="assets/capstone/spun-pile-design.jpg" alt="Spun pile foundation drawing for the Tan Thinh Loi Apartment capstone" width="1800" height="1257" loading="lazy">
           <span class="chip-n"><b>14</b><span>storeys · RC</span></span>
         </div>
         <div class="proj-in">
-          <p class="proj-meta"><b>2023</b>· B.S. capstone</p>
-          <h3>14-Storey RC Apartment Building</h3>
-          <p>Frame, beams, columns, slabs, stairs and rooftop tank, on a precast spun pile foundation carried from soil report to pile cap.</p>
-          <div class="proj-tags"><span>ETABS</span><span>SAP2000</span><span>RC design</span><span>Foundations</span></div>
+          <p class="proj-meta"><b>May 2023</b>· B.S. capstone</p>
+          <h3>Tan Thinh Loi Apartment — 14-Storey RC</h3>
+          <p>Slabs, frames, stairs and rooftop tank to Eurocode 2, on D900 spun piles to −60.9 m, compared against a bored pile option under Eurocode 7.</p>
+          <div class="proj-tags"><span>ETABS</span><span>Eurocode 2 &amp; 7</span><span>RC design</span><span>Spun piles</span></div>
           <div class="proj-foot"><button type="button" class="gal-btn block warm" data-cs="capstone">Case study →</button><button type="button" class="gal-btn block" data-gallery="capstone">Drawings</button></div>
         </div>
       </article>
@@ -803,11 +808,11 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
           <span class="tag">Foundation research</span>
         </div>
         <div class="proj-in">
-          <p class="proj-meta"><b>2021 – 2022</b>· Research assistant</p>
-          <h3>Load Transfer in Shaft-Grouted Piles</h3>
-          <p>A simplified load-transfer model for shaft-grouted bored piles, checked against full-scale pile load tests in Ho Chi Minh City.</p>
-          <div class="proj-tags"><span>Geotechnical</span><span>Pile analysis</span><span>Co-author</span></div>
-          <div class="proj-foot"><button type="button" class="gal-btn block" data-cs="piles">Details →</button></div>
+          <p class="proj-meta"><b>2021 – 2022</b>· Co-author</p>
+          <h3>Shaft-Grouted Bored Piles</h3>
+          <p>A load-transfer method for shaft-grouted piles, validated on full-scale tests at Friendship Tower. Grouting raised ultimate capacity about 1.7–2×.</p>
+          <div class="proj-tags"><span>Geotechnical</span><span>t–z analysis</span><span>JOMC 2022</span></div>
+          <div class="proj-foot"><button type="button" class="gal-btn block" data-cs="piles">Case study →</button></div>
         </div>
       </article>
 
@@ -954,8 +959,8 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
           <h3>B.S. Civil Engineering — Structural &amp; Foundation</h3>
           <p class="tl-org">Ho Chi Minh City University of Technology (HCMUT)</p>
           <ul>
-            <li>Capstone: complete structural design of a 14-storey reinforced concrete apartment building.</li>
-            <li>Foundation engineering research alongside the degree programme.</li>
+            <li>Capstone: Tan Thinh Loi Apartment, a 14-storey RC building designed to Eurocodes from slab to spun pile (advisers: Ph.D. Nguyen Hong An, Dr. Lai Van Qui).</li>
+            <li>Co-authored a 2022 journal paper on shaft-grouted bored piles alongside the degree programme.</li>
             <li>Outstanding Academic Performance, 2021–2022; OISP Scholarship, 2020–2021.</li>
           </ul>
           <div class="tl-actions"><button type="button" class="gal-btn block" data-cs="capstone">Capstone case study →</button></div>
@@ -1307,7 +1312,11 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
         ['assets/capstone/frame-model.jpg','Frame reinforcement drawing (full-size sheet)'],
         ['assets/capstone/slab-model.jpg','Slab reinforcement drawing (full-size sheet)'],
         ['assets/capstone/etabs-moment-1.jpg','ETABS analysis output'],
-        ['assets/capstone/etabs-moment-3.jpg','ETABS analysis output — structural model']
+        ['assets/capstone/etabs-moment-3.jpg','ETABS analysis output — structural model'],
+        ['assets/capstone/staircase.jpg','Design of staircase — plans, flight and landing details'],
+        ['assets/capstone/water-tank.jpg','Design of rooftop water tank — slab layouts and beams B1–B3'],
+        ['assets/capstone/spun-pile-design.jpg','Design of spun pile foundation — pile caps P1 and P2'],
+        ['assets/capstone/spun-pile-detail.jpg','Detail of PC900-A spun pile — joints, pile shoe, starter bars']
       ]
     },
     rcut:{
@@ -1427,40 +1436,52 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
       link:['Newtecons ↗','https://newtecons.vn/en/']
     },
     capstone:{
-      kicker:'Structural design · B.S. capstone', role:'Ho Chi Minh City University of Technology',
-      title:'14-Storey RC Apartment Building',
-      hero:'assets/capstone/etabs-moment-3.jpg', gallery:'capstone',
-      lead:'A complete structural design for a 14-storey reinforced concrete apartment building: from the architectural layout to the frame, members, and a precast spun pile foundation. Modelled in ETABS and SAP2000, with hand calculations to check what the software said.',
-      facts:[['Year','2023'],['System','RC frame'],['Foundation','Precast spun piles'],['Software','ETABS · SAP2000']],
+      kicker:'Structural design · B.S. capstone', role:'Bachelor dissertation (CI4447) · Ho Chi Minh City University of Technology',
+      title:'Tan Thinh Loi Apartment — 14-Storey RC Building',
+      hero:'assets/capstone/spun-pile-design.jpg', gallery:'capstone',
+      lead:'The full structural design of a 14-storey reinforced concrete apartment building with a basement, from the typical floor slab and frames down to a precast spun pile foundation. Starting from the architectural plans, I designed it to Eurocodes, modelled it in ETABS, and produced a 12-sheet construction drawing set plus a 101-page foundation report.',
+      facts:[['Submitted','May 2023'],['Structural adviser','Ph.D. Nguyen Hong An'],['Foundation adviser','Dr. Lai Van Qui'],['Codes','EC2 · EC7 · EN 1991-1-4'],['Concrete','C30/37 · C50/60'],['Rebar','CB500-V']],
+      nums:[['14','storeys + basement'],['12','drawing sheets'],['2','pile solutions compared'],['60.9 m','spun pile tip depth']],
       owned:[
-        'Laid out the structural system from the architectural plans: beam and column grids per typical floor.',
-        'Designed the frame, beams, columns and slabs, with reinforcement detailing.',
-        'Designed the staircases and the rooftop water tank.',
-        'Carried the foundation from the soil report through pile capacity to pile cap detailing.',
-        'Verified model output against hand calculations before trusting it.'
+        'Typical floor: beam and column layout, two-way slab design and slab reinforcement drawings, checked against ETABS moment contours.',
+        'Frame 2 designed and detailed from the basement to Story 14 across four sheets, including beam–column joint details.',
+        'Staircase: flights, landing slab and landing beams, with sections at 1:20.',
+        'Rooftop water tank: a 7.1 m span, so I added auxiliary beams to keep the slabs at 110 mm (top) and 200 mm (bottom).',
+        'Wind loads calculated to EN 1991-1-4 and applied floor by floor.',
+        'Foundation report (101 pages): two full solutions — D1200 bored piles to −60 m and D900 PC spun piles — each checked under Eurocode 7 design approaches DA1, DA2 and DA3.',
+        'For each solution: single-pile capacity, 5-pile and 8-pile cap layouts, group stability, immediate and consolidation settlement, cap flexure and punching shear, lateral load and pile reinforcement.',
+        'Spun pile detailing: PC900 Type A in three 18 m segments, jointing plates, pile shoe and starter-bar connection into the cap.'
       ],
       hard:[
-        ['Trusting the model','ETABS will always give you a number. Hand-checking moments and reinforcement on key members is what tells you whether the number is right.'],
-        ['From soil to pile cap','Pile capacity depends on a soil profile you only know from boreholes. The design had to stay conservative where the geotechnical data was thin.']
+        ['32 m of soft clay','The borehole shows very soft organic clay (water content 89%, undrained strength 9.2 kPa) to −23.4 m and soft clay to −32.4 m. Neither can carry the building, so the piles had to reach the clayey sand below 40 m.'],
+        ['A driven pile can only be so long','A spun pile can use at most three segments of 7–22 m each. With the cap already at −7 m, three 18 m segments put the tip at −60.9 m, deep enough in the sand layer.'],
+        ['Two answers, one building','The bored and spun pile designs were carried through the same checks so they could be compared fairly on capacity, settlement and cap size, not just on cost.'],
+        ['Trusting the model','ETABS always gives you a number. Hand-checking slab moments and member reinforcement is what tells you whether that number is right.']
       ],
-      took:'Designing the building end to end is why I can read a shop drawing and see the structure behind it — and why I check the arithmetic before I say what it means.',
-      tags:['ETABS','SAP2000','RC design','Foundation engineering','AutoCAD']
+      took:'Designing a building from slab to pile tip is why I can read a shop drawing and see the structure behind it. It is also why I check the arithmetic before I say what it means.',
+      tags:['ETABS','SAP2000','AutoCAD','Eurocode 2','Eurocode 7','RC design','Spun piles','Bored piles','Settlement analysis']
     },
     piles:{
-      kicker:'Research · Foundation engineering', role:'Research Assistant · HCMUT',
-      title:'Load Transfer in Shaft-Grouted Bored Piles',
-      lead:'Shaft grouting improves the side resistance of bored piles, but designers need a simple way to predict how load moves from the pile into the soil. I worked on a simplified load-transfer model for shaft-grouted bored piles and checked it against full-scale load tests from Ho Chi Minh City projects.',
-      facts:[['Period','Oct 2021 – Mar 2022'],['Topic','Pile load transfer'],['Validation','Full-scale load tests'],['Output','Co-authored paper']],
+      kicker:'Research · Foundation engineering', role:'Co-author · HCMUT foundation engineering group',
+      title:'Shaft-Grouted Bored Piles by the Load-Transfer Method',
+      lead:'Shaft grouting is widely used in Ho Chi Minh City to raise the side friction of bored piles, but engineers had no simple way to predict a grouted pile\'s load–settlement curve. Our paper proposes one: the classic load-transfer (t–z) method, combined with a grouted-shaft friction formula based on SPT. We validated it against full-scale static load tests and then used it to measure how much grouting actually adds.',
+      facts:[['Period','Oct 2021 – Mar 2022'],['Published','JOMC Vol. 12, No. 05 (2022)'],['Case study','Friendship Tower, District 1'],['Funding','HCMUT – VNU-HCM']],
+      nums:[['3,150 t','max test load, grouted pile'],['9.6 mm','predicted settlement at design load (10 mm measured)'],['≈1.7–2×','ultimate capacity gain from grouting']],
       owned:[
-        'Proposed a simplified load-transfer model for shaft-grouted bored piles.',
-        'Verified the model against full-scale pile load test case studies in Ho Chi Minh City.',
-        'Co-authored "The effective analysis of piles with mortared pile body by load-transfer method" (2022).'
+        'Worked in the research team developing the load-transfer analysis for shaft-grouted bored piles.',
+        'Split each pile into segments by soil layer and computed exponential t–z curves for shaft and base, with parameters from Randolph & Wroth.',
+        'Used an iterative bottom-up algorithm: assume tip settlement, solve each segment until displacement converges (10⁻⁶), step the tip down to 0.1D, and build the head load–settlement curve.',
+        'Validated against two full-scale tests at Friendship Tower (21 storeys, 4 basements): TP1, D1500 non-grouted, tested to 3,000 t; TP2, D1200 grouted from 42 m, tested to 3,150 t.',
+        'Extended the analysis to an equal-size non-grouted pile (D1200, L = 65 m) to isolate the effect of grouting under TCVN 10304:2014, ASTM D1143 and Fellenius criteria.'
       ],
       hard:[
-        ['Field data is messy','Full-scale load tests are expensive and few. Each test had to be read carefully for what it could and could not prove about the model.']
+        ['Ordinary formulas fail on grouted piles','Using the standard friction formula for TP2 matched the early part of the curve but badly underestimated its ultimate capacity. Only the grouted-pile coefficient k reproduced the test.'],
+        ['Comparing unlike piles','TP1 and TP2 differ in diameter and length, so on their own they cannot show what grouting does. Modelling a same-size non-grouted pile was the only fair comparison.'],
+        ['One district of data','All the tests come from District 1. The paper says so plainly: the method needs testing in other soil conditions before it can be trusted widely.']
       ],
-      took:'My first research habit: a model is only as good as the test it survives.',
-      tags:['Geotechnical','Load-transfer method','Bored piles','Research paper']
+      took:'My first research habit: a model is only as good as the field test it survives, and you should say where your data stops.',
+      cite:'Lai Van Qui, Nguyen Dang Khoa, Tran Quoc Viet, Nguyen Hoang Huy, Chau Dai Duong, Ngo Nguyen Hao Kiet (2022). "Phân tích hiệu quả cọc có phụt vữa thân cọc bằng phương pháp load–transfer" [Analysis of the effectiveness of shaft-grouted piles using the load-transfer method]. Tạp chí Vật liệu & Xây dựng (JOMC), 12(05), 42–49.',
+      tags:['Geotechnical','Load-transfer (t–z)','Shaft grouting','Bored piles','Static load test','TCVN 10304','Research paper']
     },
     rcut:{
       kicker:'Research · Georgia DOT', role:'Lead researcher · Georgia Tech, Prof. Yichang (James) Tsai',
@@ -1521,10 +1542,12 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
     if(d.hero) h+='<div class="cs-hero"><img src="'+d.hero+'" alt=""></div>';
     h+='<p class="cs-role">'+esc(d.role)+'</p><h2 id="cs-title">'+esc(d.title)+'</h2><p class="cs-lead">'+esc(d.lead)+'</p>';
     if(d.facts) h+='<div class="cs-facts">'+d.facts.map(function(f){ return '<div><small>'+esc(f[0])+'</small><b>'+esc(f[1])+'</b></div>'; }).join('')+'</div>';
+    if(d.nums) h+='<div class="cs-nums">'+d.nums.map(function(n){ return '<div><b>'+esc(n[0])+'</b><span>'+esc(n[1])+'</span></div>'; }).join('')+'</div>';
     if(d.owned) h+='<div class="cs-sec"><h3><i>01</i> What I owned</h3><ul class="cs-list">'+d.owned.map(function(o){ return '<li><span>'+esc(o)+'</span></li>'; }).join('')+'</ul></div>';
     if(d.hard) h+='<div class="cs-sec"><h3><i>02</i> What made it hard</h3><div class="cs-hard">'+d.hard.map(function(o){ return '<div><b>'+esc(o[0])+'</b><span>'+esc(o[1])+'</span></div>'; }).join('')+'</div></div>';
     if(d.took) h+='<div class="cs-sec"><h3><i>03</i> What I took away</h3><p>'+esc(d.took)+'</p></div>';
     if(d.gallery) h+='<div class="cs-sec"><h3><i>04</i> Drawings &amp; photos</h3><div class="cs-gal">'+G[d.gallery].items.map(function(it,k){ return '<button type="button" data-gallery="'+d.gallery+'" data-i="'+k+'" aria-label="Open '+esc(it[1])+'"><img src="'+it[0]+'" alt="" loading="lazy"></button>'; }).join('')+'</div></div>';
+    if(d.cite) h+='<div class="cs-sec"><h3><i>§</i> Publication</h3><p class="cs-cite">'+esc(d.cite)+'</p></div>';
     if(d.tags) h+='<div class="cs-tags">'+d.tags.map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div>';
     if(d.link) h+='<p style="margin-top:18px"><a class="proj-link" href="'+d.link[1]+'" target="_blank" rel="noopener">'+esc(d.link[0])+'</a></p>';
     var i=CS_ORDER.indexOf(id), p=CS_ORDER[(i-1+CS_ORDER.length)%CS_ORDER.length], n=CS_ORDER[(i+1)%CS_ORDER.length];
