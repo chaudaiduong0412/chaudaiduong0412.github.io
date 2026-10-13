@@ -7,7 +7,8 @@
 <meta name="description" content="Duong Dai Chau — M.S. Civil Engineering (CEM) at Georgia Tech. Façade superintendent, field engineer, structural designer and GDOT researcher.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="resume.css">
 <style>
 :root{
   --bg:#050816;
@@ -468,6 +469,12 @@ section{padding-block:clamp(70px,10vw,130px);position:relative;scroll-margin-top
 @media(max-width:640px){.lb-nav{position:absolute;top:42%;z-index:2;background:rgba(12,20,36,.82);width:36px;height:36px}.lb-prev{left:6px}.lb-next{right:6px}.lb-main{padding:0 4px}}
 body.lock{overflow:hidden}
 
+/* ---------- resume ---------- */
+.paper{margin-top:36px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 40px 80px -40px rgba(0,0,0,.9),0 0 0 1px var(--line);max-width:8.5in;margin-inline:auto}
+.paper .cv{width:100%}
+.paper-load{color:#4a5566;padding:40px;text-align:center;font-size:14px}
+.paper-load a{color:#1d6a91}
+
 /* ---------- contact ---------- */
 .contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(26px,5vw,56px);margin-top:48px;align-items:start}
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
@@ -526,6 +533,7 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
       <li><a href="#work">Work</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Education</a></li>
+      <li><a href="#resume">Resume</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -976,9 +984,22 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
     </div>
   </section>
 
+  <!-- ================= RESUME ================= -->
+  <section id="resume" class="wrap">
+    <p class="eyebrow rv">07 · On paper</p>
+    <h2 class="sec-h split">Resume<span class="acc">.</span></h2>
+    <p class="sec-intro rv">A general resume for construction field operations: field engineering, project engineering and superintendent support roles. Download it, or read it right here.</p>
+    <div class="cta rv" style="margin-top:24px">
+      <a class="btn btn-fill magnet" href="assets/docs/DuongDaiChau_Resume_Field_Operations.pdf" target="_blank" rel="noopener" download>Download PDF <span class="arr">↓</span></a>
+      <a class="btn btn-line magnet" href="assets/docs/DuongDaiChau_Resume_Field_Operations.docx" download>Word (.docx)</a>
+      <a class="btn btn-line magnet" href="resume.html" target="_blank" rel="noopener">Open printable page ↗</a>
+    </div>
+    <div class="paper rv zoom" id="paper"><p class="paper-load">Loading resume… <a href="resume.html">open it directly</a>.</p></div>
+  </section>
+
   <!-- ================= CONTACT ================= -->
   <section id="contact" class="wrap">
-    <p class="eyebrow rv">07 · Get in touch</p>
+    <p class="eyebrow rv">08 · Get in touch</p>
     <h2 class="sec-h split">Let's build something<span class="acc">.</span></h2>
 
     <div class="contact-grid">
@@ -1621,6 +1642,12 @@ footer{border-top:1px solid var(--line);padding-block:34px;position:relative;z-i
     }); });
     cnt.textContent=cards.length+' of '+cards.length+' projects';
   })();
+
+  /* ---------- resume: pull the single source (resume.html) into the page ---------- */
+  fetch('resume.html').then(function(r){ return r.ok ? r.text() : Promise.reject(); }).then(function(t){
+    var doc=new DOMParser().parseFromString(t,'text/html'), cv=doc.getElementById('cv');
+    if(cv){ var paper=$('#paper'); paper.innerHTML=''; paper.appendChild(document.importNode(cv,true)); }
+  }).catch(function(){});
 
   /* ---------- contact form -> mailto ---------- */
   $('#cform').addEventListener('submit',function(ev){
